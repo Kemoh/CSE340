@@ -1,6 +1,235 @@
-/******* Change Box Model ***************/
+/******* Change Box Model **********/
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+/* Wrapper Div Container */
+#wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Start Header */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.siteName a,
+#tools a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.siteName a {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#tools {
+  padding-bottom: 2rem;
+}
+
+#tools a {
+  font-size: .9em;
+}
+/* End Header */
+
+/* Start Nav */
+.navigation {
+  background: #000000;
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation li {
+  padding: 1rem 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+nav li:hover {
+  background: #444;
+}
+/* End Nav */
+
+h1, h3, h4 {
+  font-size:1.2em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 1rem;
+}
+
+.hero-img, .hero-cta-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-cta-img {
+  width: 80px;
+  height: 40px;
+}
+
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color:cornflowerblue;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-content ul {
+  margin: -1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-content li {
+  text-decoration: none;
+  font-size: .8em;
+  font-weight: 800;
+}
+/* End Hero Section */
+
+/* Start Reviews Section */
+
+.reviews li {
+  margin-bottom: 0.5rem;
+}
+/* End Reviews Section*/
+
+/* Start Upgrades Section */
+.upgrades {
+  margin-bottom: -1rem;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.upgrade-item {
+  background-color:cornflowerblue;
+  text-align: center;
+  margin: 0 0.2rem 2rem;
+}
+
+.upgrade-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.upgrade-item figcaption {
+  font-size: .8em;
+  font-weight: bold;
+  background-color: #ffffff;
+}
+/* End Upgrades Section */
+
+/* Start Footer */
+.copyright {
+  font-size: small;
+}
+/* END MOBILE SCREEN SIZES */
+
+/* START TABLET SCREEN SIZE */
+@media screen and (min-width: 768px) {
+  h1 {
+  font-size: 1.7em;
+}
+
+.hero {
+  padding-left: 8rem;
+}
+
+.hero-img {
+  max-width: 500px;
+}
+
+.hero-content {
+  top: 12%;
+  left: 12%;
+  padding: 0;
+  font-size: 1.2em;
+}
+
+.hero-cta-img {
+  width: 110px;
+  height: 45px;
+  margin-top: 1rem;
+}
+
+.review-upgrade-cont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+}
+  
+.upgrades {
+  grid-column: 1/2;
+  grid-row: 1;
+}
+
+.reviews {
+    grid-column: 2/3;
+    grid-row: 1;
+}
+    
+.reviews h3 {
+      padding-left: 1.5rem;
+    }
+
+.reviews li {
+      margin-bottom: 1.6rem;
+  }
+  
+  body {
+    border: 3px solid cornflowerblue;
+    margin: 0;
+    border-radius: 8px;
+  }
+}
+/* END TABLET SCREEN SIZE */
+
+
+/* START LAPTOP SCREEN SIZE */
+@media screen and (min-width: 1024px) {
+  body {
+    margin: 0 7rem;
+  }
+}
+
+/* END LAPTOP SCREEN SIZE */
