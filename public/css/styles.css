@@ -34,7 +34,7 @@ body {
 
 .siteName a {
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 #tools {
@@ -42,7 +42,7 @@ body {
 }
 
 #tools a {
-  font-size: .9em;
+  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
 }
 /* End Header */
 
@@ -60,25 +60,30 @@ body {
   padding: 0;
 }
 
-.navigation li {
-  padding: 1rem 0;
+.navigation li, .navigation a {
+  padding: .5rem 0;
   color: #ffffff;
   cursor: pointer;
 }
 
-nav li:hover {
-  background: #444;
+.navigation a {
+  text-decoration: none;
+  font-size: clamp(1rem, 2vw, 2.5rem);
+}
+
+.navigation li a:hover {
+  background: #808080;
 }
 /* End Nav */
 
 h1, h3, h4 {
-  font-size:1.2em;
+  font-size: clamp(1.5rem, 1.5vw, 2rem);
   font-weight: bold;
 }
 
 h2 {
-  font-size: 1em;
-  font-weight: 800;
+  font-size: clamp(1.3rem, 1.5vw, 1.5rem);
+  font-weight: bold;
 }
 
 /* Hero Section */
@@ -160,9 +165,94 @@ h2 {
 /* End Upgrades Section */
 
 /* Start Footer */
-.copyright {
-  font-size: small;
+footer {
+  font-size: clamp(0.9rem, 1.2vw, 1.5rem);
+  margin-bottom: 1.5rem;
 }
+
+footer .copyright {
+  margin-bottom: 0;
+}
+
+/* Start classification Grid view */
+/* Inventory Display Grid */
+#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 1rem;
+  list-style: none;
+
+  & li {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    text-align: center;
+    
+    & img {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: hidden;
+      border-radius: 12px 12px 0 0;
+      margin-bottom: -1rem;
+    }
+
+    .namePrice {
+      font-size: clamp(1rem, 1.5vw, 1.5rem);
+    }
+  }
+}
+/* End classification Grid view */
+
+/* Start of Vehicle Detail View */
+/* Vehicle Detail View Styling */
+.vehicle-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: auto;
+}
+
+.vehicle-image {
+  flex: 1 1 40%;
+  max-width: 350px;
+  border-radius: 12px; 
+}
+
+.vehicle-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.vehicle-info {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.vehicle-info p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.vehicle-info .price, .vehicle-info .color {
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+  background-color: #f9f9f9;
+  padding: 1rem;
+}
+
+.vehicle-info .description, .vehicle-info .mileage {
+  padding-left: 1rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+}
+
+/* Start of Vehicle Detail View*/
+
 /* END MOBILE SCREEN SIZES */
 
 /* START TABLET SCREEN SIZE */
@@ -221,6 +311,13 @@ h2 {
     margin: 0;
     border-radius: 8px;
   }
+
+/* Start classification Grid view */
+#inv-display {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* End classification Grid view */
 }
 /* END TABLET SCREEN SIZE */
 
