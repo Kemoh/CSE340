@@ -1,9 +1,12 @@
-/******* Change Box Model **********/
+/* ===============================
+   BOX MODEL
+================================ */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 
 body {
   margin: 0;
@@ -11,14 +14,20 @@ body {
   line-height: 1.5;
 }
 
-/* Wrapper Div Container */
+/* ===============================
+   WRAPPER INDEX PAGE
+================================ */
+
 #wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-/* Start Header */
+/* ===============================
+   HEADER SECTION
+================================ */
+
 #top-header {
   display: flex;
   justify-content: space-between;
@@ -42,11 +51,14 @@ body {
 }
 
 #tools a {
-  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
+  font-size: clamp(1rem, 1.5vw, 2rem);
 }
-/* End Header */
 
-/* Start Nav */
+
+/* ===============================
+   NAVIGATION SECTION
+================================ */
+
 .navigation {
   background: #000000;
 }
@@ -74,7 +86,11 @@ body {
 .navigation li a:hover {
   background: #808080;
 }
-/* End Nav */
+
+
+/* ===============================
+   HEADINGS
+================================ */
 
 h1, h3, h4 {
   font-size: clamp(1.5rem, 1.5vw, 2rem);
@@ -86,7 +102,9 @@ h2 {
   font-weight: bold;
 }
 
-/* Hero Section */
+/* ===============================
+   HERO SECTION
+================================ */
 .hero {
   position: relative;
   width: 100%;
@@ -124,16 +142,21 @@ h2 {
   font-size: .8em;
   font-weight: 800;
 }
-/* End Hero Section */
 
-/* Start Reviews Section */
+
+/* ===============================
+   REVIEW SECTION
+================================ */
 
 .reviews li {
   margin-bottom: 0.5rem;
 }
-/* End Reviews Section*/
 
-/* Start Upgrades Section */
+
+/* ===============================
+   UPGRADE SECTION
+================================ */
+
 .upgrades {
   margin-bottom: -1rem;
 }
@@ -162,9 +185,12 @@ h2 {
   font-weight: bold;
   background-color: #ffffff;
 }
-/* End Upgrades Section */
 
-/* Start Footer */
+
+/* ===============================
+   FOOTER SECTION
+================================ */
+
 footer {
   font-size: clamp(0.9rem, 1.2vw, 1.5rem);
   margin-bottom: 1.5rem;
@@ -174,8 +200,10 @@ footer .copyright {
   margin-bottom: 0;
 }
 
-/* Start classification Grid view */
-/* Inventory Display Grid */
+/* ===============================
+   VEHICLE INVENTORY VIEW
+================================ */
+
 #inv-display {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -183,30 +211,32 @@ footer .copyright {
   padding: 0;
   margin: 1rem;
   list-style: none;
-
-  & li {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    text-align: center;
-    
-    & img {
-      width: 100%;
-      height: auto;
-      display: block;
-      overflow: hidden;
-      border-radius: 12px 12px 0 0;
-      margin-bottom: -1rem;
-    }
-
-    .namePrice {
-      font-size: clamp(1rem, 1.5vw, 1.5rem);
-    }
-  }
 }
-/* End classification Grid view */
 
-/* Start of Vehicle Detail View */
-/* Vehicle Detail View Styling */
+#inv-display li {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  text-align: center;
+}
+
+#inv-display img {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: -1rem;
+}
+
+.namePrice {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+
+/* ===============================
+   VEHICLE DETAIL VIEW
+================================ */
+
 .vehicle-detail {
   display: flex;
   flex-wrap: wrap;
@@ -251,15 +281,228 @@ footer .copyright {
   font-size: clamp(1.1rem, 1.5vw, 1.5rem);
 }
 
-/* Start of Vehicle Detail View*/
 
-/* END MOBILE SCREEN SIZES */
+/* ===============================
+   LOGIN & REGISTER FORMS
+================================ */
 
-/* START TABLET SCREEN SIZE */
+.section-container {
+  max-width: 480px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+.form label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: -1rem;
+}
+
+
+.form input {
+  padding: 0.75rem 0.9rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+
+.password-rules {
+  font-size: 0.85rem;
+  color: #555;
+  background-color: #f8f9fa;
+  padding: 0.75rem;
+  border-left: 4px solid #2563eb;
+  border-radius: 6px;
+}
+
+.toggle-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.toggle-btn:hover {
+  text-decoration: underline;
+}
+
+.submit-btn {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.submit-btn:hover {
+  background-color: #1e40af;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+
+.required-fields {
+  font-size: 0.85rem;
+  color: #b91c1c;
+  margin-bottom: 1rem;
+}
+
+
+.sign-up-link {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.sign-up-link a {
+  font-weight: 600;
+  color: #000;
+  text-decoration: underline;
+}
+
+.sign-up-link a:hover {
+  text-decoration: none;
+}
+
+/* .notice {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding: 0;
+  list-style: none;
+}
+
+.notice li {
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  background-color: #ecfdf5;
+  color: #065f46;
+  border-left: 5px solid #10b981;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.notice-registration {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding-left: 1rem;
+  color: #ff0000;
+} */
+
+.notice-failure {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding-left: 1rem;
+  color: #ff0000;
+} 
+
+.notice-success {
+  max-width: 480px;
+  margin: 1.5rem auto;
+  padding-left: 1rem;
+  color: #008000;
+} 
+
+
+/* ===============================
+   VEHICLE MANAGEMENT VIEW
+================================ */
+.management-links {
+  max-width: 480px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  list-style: none;
+}
+
+.management-links ul {
+  list-style: none;
+}
+
+
+/* ===============================
+  ADD VEHICLE FORM VIEW
+================================ */
+  /* General form styling */
+form input, form select, form textarea {
+  display: block;
+  margin: 0.5rem 0 1rem 0;
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Valid input */
+form input:valid,
+form select:valid,
+form textarea:valid {
+  border-color: #28a745; /* green */
+  background-color: #e6ffed;
+}
+
+/* Invalid input */
+form input:invalid,
+form select:invalid,
+form textarea:invalid {
+  border-color: #dc3545; /* red */
+  background-color: #ffe6e6;
+}
+
+/* Error message list */
+.notice-registration {
+  color: #dc3545;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+
+
+/* ===============================
+   TABLET DEVICES
+================================ */
+
 @media screen and (min-width: 768px) {
   h1 {
   font-size: 1.7em;
 }
+
+/* ===============================
+   HERO SECTION
+================================ */
 
 .hero {
   padding-left: 8rem;
@@ -282,6 +525,10 @@ footer .copyright {
   margin-top: 1rem;
 }
 
+/* ===============================
+   UPGRADE SECTION
+================================ */
+
 .review-upgrade-cont {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -292,6 +539,10 @@ footer .copyright {
   grid-column: 1/2;
   grid-row: 1;
 }
+
+/* ===============================
+   REVIEW SECTION
+================================ */
 
 .reviews {
     grid-column: 2/3;
@@ -312,21 +563,32 @@ footer .copyright {
     border-radius: 8px;
   }
 
-/* Start classification Grid view */
+/* ===============================
+   VEHICLE INVENTORY
+================================ */
+
 #inv-display {
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* End classification Grid view */
+
+/* ===============================
+  LOGIN & REGISTER FORMS
+================================ */
+
+.section-container {
+  margin: 0 auto;
 }
-/* END TABLET SCREEN SIZE */
 
+}
 
-/* START LAPTOP SCREEN SIZE */
+/* ===============================
+   LARGE DEVICES
+================================ */
+
 @media screen and (min-width: 1024px) {
   body {
     margin: 0 7rem;
   }
 }
 
-/* END LAPTOP SCREEN SIZE */

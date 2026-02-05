@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+
 const Util = {}
 
 /* ************************************
@@ -57,46 +58,65 @@ Util.buildClassificationGrid = async function(data){
 }
 
 
-/* *********************************
-* Build vehicle detail view
-*********************************** */
-// Function Name
-Util.buildVehicleDetail = async function (vehicle) {
-  // Initialize detail string
-  let detail = ''
+/* ===============================
+   BUILD VEHICLE DETAIL VIEW
+================================ */
 
-  // Check if vehicle exists
+Util.buildVehicleDetail = async function (vehicle) {
+  
+  let vehicleDetail = ''
+
+  
   if (vehicle) {
-    // Vehicle Section
-    detail += '<section class="vehicle-detail">'
+    vehicleDetail += '<section class="vehicle-detail">'
 
     // Image
-    detail += '<div class="vehicle-image">'
-    detail += '<img src="' + vehicle.inv_image + '" alt="Image of ' +
-              vehicle.inv_make + ' ' + vehicle.inv_model + '">'
-    detail += '</div>'
+    vehicleDetail += '<div class="vehicle-image">'
+    vehicleDetail += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + '">'
+    vehicleDetail += '</div>'
 
     // Heading h1
-    detail += '<div class="vehicle-info">'
-    detail += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </h2>'
+    vehicleDetail += '<div class="vehicle-info">'
+    vehicleDetail += '<h2>' + vehicle.inv_make + ' ' + vehicle.inv_model + ' Details </h2>'
 
     // Price
-    detail += '<p class="price"><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>'
+    vehicleDetail += '<p class="price"><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>'
 
     // Description
-    detail += '<p class="description"><strong>Description:</strong><br>' + vehicle.inv_description + '</p>'
+    vehicleDetail += '<p class="description"><strong>Description:</strong><br>' + vehicle.inv_description + '</p>'
 
     // Color
-    detail += '<p class="color"><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
+    vehicleDetail += '<p class="color"><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
 
     // Mileage
-    detail += '<p class="mileage"><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + ' </p>'
+    vehicleDetail += '<p class="mileage"><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + ' </p>'
 
-    detail += '</div>'
-    detail += '</section>'
+    vehicleDetail += '</div>'
+    vehicleDetail += '</section>'
   } else {
-    detail += '<p class="notice">Sorry, vehicle details could not be found.</p>'
+    vehicleDetail += '<p class="notice">Sorry, vehicle details could not be found.</p>'
   }
 
-  return detail
+  return vehicleDetail
 }
+
+
+/* ===============================
+   BUILD CLASSIFICATION DROP-DOWN LIST
+================================ */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+  '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (classification_id != null && row.classification_id == classification_id) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
+

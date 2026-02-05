@@ -1,0 +1,21 @@
+<!-- The content heading -->
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <%- res.redirect('/') %>
+<% } %>
+
+<!-- Flash message -->
+<%- messages() %>
+
+
+<!-- Vehicle Management View -->
+<section class="management-links">
+    <ul>
+        <li><a href="/inv/add-classification" title="Add a new vehicle classification">Add New Classification</a></li>
+        <li><a href="/inv/add-vehicle" title="Add a new vehicle">Add New Vehicle</a></li>
+    </ul>
+</section>
+
+<!-- Import Fade-Out Function -->
+<script src="../js/script.js"></script>

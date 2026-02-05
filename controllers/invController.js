@@ -41,7 +41,7 @@ invCont.buildVehicleDetailByInventoryId = async function (req, res, next) {
         const vehicleResponseData = await invModel.getInventoryById(inventory_id) 
 
         // Calls a utility function to build an HTML string
-        const vehicleDetailHTML = await utilities.buildVehicleDetail(vehicleResponseData)
+        const vehicleDetail = await utilities.buildVehicleDetail(vehicleResponseData)
 
         // Calls a utility function to build the navigation menu
         let nav = await utilities.getNav()
@@ -53,7 +53,7 @@ invCont.buildVehicleDetailByInventoryId = async function (req, res, next) {
         res.render("./inventory/detail", {
             title: className,
             nav,
-            vehicleDetailHTML,
+            vehicleDetail,
         }) 
     }
 
@@ -64,6 +64,7 @@ invCont.throwIntentionalError = async function (req, res, next) {
     // Simulates a 500 error
     throw new Error("Intentional 500 error")  
 }
+
 
 // Export the invCont object so other files can import and use it
 module.exports = invCont
