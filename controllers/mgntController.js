@@ -10,11 +10,15 @@ const invModel = require("../models/management-model")
         // Calls a utility function to build the navigation menu
         let nav = await utilities.getNav()
 
+        // Calls a utility function to build the Select Inventory Items
+        const classificationSelect = await utilities.buildClassificationList()
+
         // Calls the Express render function to return a view to the browser
         res.render("inventory/management", {
             title: "Vehicle Management",
             nav,
-            errors: null
+            errors: null,
+            classificationSelect
         }) 
     }
 
@@ -47,13 +51,16 @@ async function processAddClassification(req, res) {
         // Rebuild nav immediately so the new classification appears 
         let nav = await utilities.getNav()
 
+        const classificationSelect = await utilities.buildClassificationList()
+
         // Flash success message
         req.flash("notice-success", `Classification "${classification_name}" added successfully.`)
 
         // Render management view with updated nav and success message 
         res.status(201).render("inventory/management", { 
             title: "Vehicle Management", nav, 
-            errors: null 
+            errors: null,
+            classificationSelect 
         })
     } else {
         // If insertion fails, rebuild nav and re-render add-classification view
@@ -108,11 +115,13 @@ async function processAddVehicle(req, res) {
 
   if (result) {
     let nav = await utilities.getNav()
+    const classificationSelect = await utilities.buildClassificationList()
     req.flash("notice", `Vehicle "${inv_make} ${inv_model}" added successfully.`)
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
-      errors: null
+      errors: null,
+      classificationSelect
     })
   } else {
     let nav = await utilities.getNav()

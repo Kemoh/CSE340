@@ -97,6 +97,61 @@ const vehicleRules = () => {
 }
 
 
+/*  **********************************
+*  Add Vehicle Data Validation Rules
+* ********************************* */
+const newInventoryRules = () => {
+  return [
+    body("classification_id")
+    .notEmpty()
+    .withMessage("Classification is required."),
+
+    body("inv_make")
+    .trim()
+    .isAlpha()
+    .isLength({ min: 3 })
+    .withMessage("Make must be alphabetic and at least 3 characters."),
+
+    body("inv_model")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("Model is required."),
+
+    body("inv_description")
+    .trim()
+    .notEmpty()
+    .withMessage("Description is required."),
+
+    body("inv_image")
+    .trim()
+    .notEmpty()
+    .withMessage("Image path is required."),
+
+    body("inv_thumbnail")
+    .trim()
+    .notEmpty()
+    .withMessage("Thumbnail path is required."),
+
+    body("inv_price")
+    .isFloat()
+    .withMessage("Price must be a number."),
+
+    body("inv_year")
+    .isInt({ min: 1900, max: 9999 })
+    .isLength({ min: 4 })
+    .withMessage("Year must be 4 digits."),
+
+    body("inv_miles")
+    .isInt()
+    .withMessage("Miles must be digits only."),
+
+    body("inv_color")
+    .trim()
+    .isAlpha()
+    .withMessage("Color must be alphabetic.")
+  ]
+}
+
 /* ******************************
 * Check Add Vehicle Data
 * ***************************** */
@@ -120,4 +175,31 @@ const checkVehicleData = async (req, res, next) => {
   next()
 }
 
-module.exports = { classificationRules, vehicleRules, checkClassificationData, checkVehicleData }
+/* ******************************
+* Check Update Vehicle Data
+* ***************************** */
+const checkUpdateData = async (req, res, next) => {
+  const { classification_id, inv_id } = req.body
+
+  let errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    let classificationList = await utilities.buildClassificationList(classification_id)
+
+    const itemName = `${req.body.inv_make} ${req.body.inv_model}`
+
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit " + itemName,
+      nav,
+      classificationList,
+      inv_id, 
+      ...req.body 
+    })
+    return
+  }
+  next()
+}
+
+
+module.exports = { classificationRules, vehicleRules, checkClassificationData, checkVehicleData, checkUpdateData, newInventoryRules }

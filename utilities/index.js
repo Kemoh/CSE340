@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 const Util = {}
 
@@ -26,8 +28,6 @@ Util.getNav = async function (req, res, next) {
 * General Error Handling
 *****************************************/
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-module.exports = Util
 
 /* *************************************
 * Build the classification view 
@@ -120,3 +120,61 @@ Util.buildClassificationList = async function (classification_id = null) {
   return classificationList
 }
 
+
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+ if (req.cookies.jwt) {
+  jwt.verify(
+   req.cookies.jwt,
+   process.env.ACCESS_TOKEN_SECRET,
+   function (err, accountData) {
+    if (err) {
+     req.flash("Please log in")
+     res.clearCookie("jwt")
+     return res.redirect("/account/login")
+    }
+    res.locals.accountData = accountData
+    res.locals.loggedin = 1
+    next()
+   })
+ } else {
+  next()
+ }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+
+/* ****************************************
+ * Check Account Type for Admin/Employee access
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  // Ensure JWT has been verified first
+  if (res.locals.accountData) {
+    const { account_type } = res.locals.accountData
+    if (account_type === "Employee" || account_type === "Admin") {
+      // Authorized
+      return next()
+    } else {
+      req.flash("notice", "You do not have permission to access that page.")
+      return res.redirect("/account/login")
+    }
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+}
+
+module.exports = Util

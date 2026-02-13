@@ -61,4 +61,5 @@ async function addVehicle(classification_id,
     } 
 }
 
+
 module.exports = { addClassification, addVehicle }

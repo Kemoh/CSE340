@@ -17,6 +17,8 @@ const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
 
 /* ***********************
  * Middleware
@@ -34,16 +36,35 @@ const bodyParser = require("body-parser")
 }))
 
 
+/* ***************************************
+ * Middleware: Make account data available * to all views
+ * ***************************************/
+app.use((req, res, next) => {
+  res.locals.accountData = req.session.accountData
+  next()
+})
+
+
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
+res.locals.messages = require('express-messages')(req, res)
   next()
 })
 
 // Process Registration Activity
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// Login Activity
+app.use(cookieParser())
+
+// JWT Messages Middleware
+app.use(utilities.checkJWTToken)
+
+
+// Login Process Activity
+// app.use(utilities.checkJWTToken())
 
 /* ***********************
  * View Engine and Templates
@@ -59,14 +80,14 @@ app.use(static)
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-// Inventory routes
+// // Inventory routes (public classification/detail views)
 app.use("/inv", inventoryRoute)
 
 // Account routes
 app.use("/account", accountRoute)
 
-// Management routes
-app.use("/inv", managementRoute)
+// Management routes (admin/employee only)
+app.use("/inv/", managementRoute)
 
 // File Not Found Route - must be the last route in the list
 app.use(async (req, res, next) => {
